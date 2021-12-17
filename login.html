@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <style>
+        .login-wrapper{
+            display: flex;
+            justify-content: center;
+            margin-top: 15%;
+        }
+        .txt {
+            height: 35px;
+            border-radius: 5px;
+        }
+        h3{
+            margin-bottom: 5px;
+        }
+        .button{
+            height: 40px;
+            width: 130px;
+            text-align: center;
+            color: #fff;
+            background-color: blue;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="login-wrapper">
+        <div class="layout">
+            <h1>Login</h1>
+            <form name="frm">
+                <h3>Username</h3>
+                <input type="text" class="txt" id="txtuser" placeholder="Tên đăng nhập">
+                <h3>Password</h3>
+                <input type="password" class="txt" id="txtpass" placeholder="Mật khẩu"><br><br>
+                <input type="button" value="Login" class="button" id="click" name="login">
+            </form>
+            <div class="kq"></div>
+        </div>
+        
+    </div>
+</body>
+<script>
+    $(document).ready(function(){
+        $("#click").click(function(){
+            var name = $('#txtuser').val();
+            var pass = $("#txtpass").val();
+            var data = {name, pass};
+            $.post('loginBT.php', data, function(data){
+                $('.kq').html(data);
+            })
+        })
+    })
+</script>
+</html>

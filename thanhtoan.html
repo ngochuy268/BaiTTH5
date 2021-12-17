@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <title>Document</title>
+  </head>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+      .thanhtoan{
+          display: flex;
+          padding: 30px;
+          justify-content: space-between;
+          white-space: nowrap;
+
+      }
+      .thanhtoan>div{
+        background-color: #eee;
+        padding: 20px;
+        border-radius: 7px;
+      }
+      input{
+          width: 100%;
+          height: 20px;
+          border-radius: 7px;
+          outline: none;
+          border: none;
+          padding: 20px;
+      }
+      p {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      td{
+          padding:10px 20px;
+          
+      }
+      button{
+          margin-top: 20px;
+          width: 100%;
+          padding: 15px;
+          text-align: center;
+          line-height: 10px;
+          border-radius: 7px;
+          outline: none;
+          border: none;
+          background-color: rgb(37, 252, 9);
+          color: white;
+      }
+  </style>
+  <body>
+      <div class="thanhtoan">
+
+          <div>
+            <table>
+              <tr>
+                <td><h2>Thông tin giao hàng</h2></td>
+                <td><h2>Thông tin nhận hàng</h2></td>
+              </tr>
+              <tr>
+                <td>
+                  <p><i class="fas fa-user"></i> Họ tên</p>
+                  <input id="name" type="text" />
+                </td>
+                <td>
+                  <p><i class="far fa-address-card"></i> Địa chỉ nhận hàng</p>
+                  <input id="address" type="text" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p><i class="fas fa-phone"></i> Số điện thoại</p>
+                  <input id="phone" type="text" maxlength="11"/>
+                </td>
+                <td>
+                  <p><i class="far fa-city"></i> Tỉnh/Thành phố</p>
+                  <input type="text" id="tinh">
+                </td>
+              </tr>
+      
+              <tr>
+                <td>
+                  <p><i class="fas fa-envelope"></i> Email</p>
+                  <input  type="email" id="email" />
+                </td>
+                <td>
+                  <p><i class="far fa-city"></i> Quận/Huyện</p>
+                  <input type="text" id="quan">
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>
+                  <p><i class="far fa-city"></i> Phường xã</p>
+                  <input type="text" id="xa">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2"><button id="submit">Thanh Toán</button></td>
+              </tr>
+            </table>
+          </div>
+      
+          <div style='height: 100%;'>
+              <table id="Cart">
+                 
+              </table>
+          </div>
+      </div>
+      <script >
+             const getCart={
+                 type:'getCart'
+             }
+             $.get('thanhtoan.php',getCart, function (data) {
+                     $('#Cart').html(data);
+            
+             })
+             $('#submit').on('click',function(){
+
+               const action={
+                 type:'thanhtoan',
+                 name:$("#name").val(),
+                 address:$("#address").val(),
+                 phone:$("#phone").val(),
+                 email:$("#email").val(),
+                 tinh:$("#tinh").val(),
+                 quan:$("#quan").val(),
+                 xa:$("#xa").val(),
+               }
+                $.post('thanhtoan.php',action,function(data){
+                  alert(data)
+                })
+
+             })
+            
+      </script>
+  </body>
+</html>
